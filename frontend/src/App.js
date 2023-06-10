@@ -1,6 +1,7 @@
 import './App.css';
 import { Container, Row } from 'react-bootstrap';
 import Truck from './Components/Truck';
+import TruckManager from './Components/TruckManager';
 
 function App() {
 
@@ -9,7 +10,7 @@ function App() {
       <Row>
         <h1>Truck Tracker</h1>
       </Row>
-      <Truck />
+      <TruckManager />
     </Container>
   );
 }

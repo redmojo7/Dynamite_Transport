@@ -21,12 +21,8 @@ export const updateTruck = async (truckId, updatedTruckData) => {
 };
 
 export const createTruck = async (newTruckData) => {
-    try {
-        const response = await axios.post(`${baseURL}/`, newTruckData);
-        return response.data;
-    } catch (error) {
-        throw new Error('Error occurred during POST request');
-    }
+    const response = await axios.post(`${baseURL}/`, newTruckData);
+    return response.data;
 };
 
 export const deleteTruck = async (truckId) => {
