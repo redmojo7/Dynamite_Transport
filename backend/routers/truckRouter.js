@@ -12,12 +12,18 @@ truckRouter.get('/', (req, res) => {
 
 // POST /api/trucks
 truckRouter.post('/', (req, res) => {
-    // Get the truck data from the request body
-    const truck = req.body;
-    //
+  const truck = req.body;
+  
+  // Check if the registration already exists
+  const existingTruck = trucksData.find((t) => t.registration === truck.registration);
+  if (existingTruck) {
+    return res.status(400).json({ error: 'Registration already exists' });
+  }
 
-    // Return the updated trucksData as the response
-    res.json(trucksData);
+  trucksData.push(truck);
+  
+  // Return the updated trucksData as the response
+  res.json(trucksData);
 });
 
 // PUT /api/trucks/:id
