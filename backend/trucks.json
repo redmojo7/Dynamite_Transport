@@ -1,0 +1,20 @@
+[   
+    {
+        "registration": "1ABC123",
+        "arrival": "2023-06-08 09:00",
+        "departure": "2023-06-08 16:00",
+        "bay": "1"
+    },
+    {
+        "registration": "2DEF456",
+        "arrival": "2023-06-08 10:30",
+        "departure": "2023-06-08 18:30",
+        "bay": "2"
+    },
+    {
+        "registration": "3GHI789",
+        "arrival": "2023-06-08 11:45",
+        "departure": "2023-06-08 17:45",
+        "bay": "3"
+    }
+]
