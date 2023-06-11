@@ -7,7 +7,7 @@ class TruckForm extends Component {
         registration: '',
         arrival: new Date(),
         departure: new Date(),
-        bay: '',
+        bay: 1,
         formErrors: ''
     };
 
@@ -47,10 +47,16 @@ class TruckForm extends Component {
         }
     }
 
-  
+
     render() {
         const { registration, arrival, departure, bay, formErrors } = this.state;
         const { status, message } = this.props.response;
+        const { occupiedBays } = this.props;
+        console.log('Occupied bays sss:', occupiedBays);
+        // Filter out the occupied bays from the available options
+        const availableBays = Array.from({ length: 12 }, (_, i) => (i + 1))
+            .filter(b => !occupiedBays.includes(b.toString()));
+        console.log('Available bays:', availableBays);
 
         return (
             <Form onSubmit={this.handleSubmit}>
@@ -93,16 +99,19 @@ class TruckForm extends Component {
                 <Form.Group controlId="bay">
                     <Form.Label>Bay#</Form.Label>
                     <Form.Control
-                        type="number"
+                        as="select"
                         name="bay"
-                        min={1}
-                        max={12}
                         value={bay}
                         onChange={(event) => this.handleChange(event.target.value, 'bay')}
-                    />
+                    >
+                        <option value="">Select Bay</option>
+                        {availableBays.map(b => (
+                            <option key={b} value={b}>{b}</option>
+                        ))}
+                    </Form.Control>
                 </Form.Group>
                 {formErrors && (<Alert variant="danger">{formErrors}</Alert>)}
-                <Button variant="primary" type="submit">
+                <Button className="mt-2" variant="primary" type="submit">
                     Add Truck
                 </Button>
             </Form>

@@ -7,6 +7,7 @@ import TruckForm from './TruckForm.js';
 class TruckManager extends Component {
     state = {
         trucks: [],
+        occupiedBays: [],
         response: {
             status: '',
             message: '',
@@ -17,7 +18,12 @@ class TruckManager extends Component {
         // Fetch the initial list of trucks from the backend server
         getTrucks()
             .then((trucksData) => {
-                this.setState({ trucks: trucksData });
+
+
+                this.setState({
+                    trucks: trucksData,
+
+                });
             })
             .catch((error) => {
                 console.error('Error occurred during GET request:', error);
@@ -25,28 +31,39 @@ class TruckManager extends Component {
             });
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        // Check if the trucks state changed
+        // If so, update the occupied bays state
+        if (prevState.trucks !== this.state.trucks) {
+            const occupiedBays = this.state.trucks.map((truck) => truck.bay);
+            this.setState({ occupiedBays });
+        }
+    }
+
     setResponse = (status, message) => {
         this.setState((prevState) => ({
-          response: {
-            ...prevState.response,
-            status: status,
-            message: message,
-          }
+            response: {
+                ...prevState.response,
+                status: status,
+                message: message,
+            }
         }));
-      };
+    };
+
+
 
     handleAddTruck = async (truck) => {
         console.log('Adding truck:', truck);
         try {
-          const trucks = await createTruck(truck);
-          console.log('All trucks:', trucks);
-          // Update the state to add the new truck to the list
-          this.setState({trucks: trucks});
-          // Set success response
-          this.setResponse('success', 'Truck added successfully');
+            const trucks = await createTruck(truck);
+            console.log('All trucks:', trucks);
+            // Update the state to add the new truck to the list
+            this.setState({ trucks: trucks });
+            // Set success response
+            this.setResponse('success', 'Truck added successfully');
         } catch (error) {
-          console.error('Error occurred during truck creation:', error);
-          this.setResponse('error', error.response.data.error);
+            console.error('Error occurred during truck creation:', error);
+            this.setResponse('error', error.response.data.error);
         }
     };
 
@@ -54,9 +71,18 @@ class TruckManager extends Component {
         // TODO: Implement logic to delete the truck with the specified ID from the backend server
         console.log('Deleting truck:', truckId);
         // Update the state to remove the truck from the list
-        this.setState((prevState) => ({
-            trucks: prevState.trucks.filter((truck) => truck.id !== truckId),
-        }));
+
+        deleteTruck(truckId)
+            .then((trucksData) => {
+                this.setState({ trucks: trucksData });
+            })
+            .catch((error) => {
+                console.error('Error occurred during DELETE request:', error);
+                // Handle the error state
+            });
+        //this.setState((prevState) => ({
+        //    trucks: prevState.trucks.filter((truck) => truck.id !== truckId),
+        //}));
     };
 
     render() {
@@ -69,12 +95,12 @@ class TruckManager extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col>
-                        <Trucks trucks={trucks} />
+                    <Col sm={6}>
+                        <Trucks trucks={trucks} onDelete={this.handleDeleteTruck} />
                     </Col>
-                    <Col>
+                    <Col sm={{ span: 4, offset: 1 }}>
                         <h2>Add Truck</h2>
-                        <TruckForm onAddTruck={this.handleAddTruck} response={this.state.response}/>
+                        <TruckForm occupiedBays={this.state.occupiedBays} onAddTruck={this.handleAddTruck} response={this.state.response} />
                     </Col>
                 </Row>
             </Container>

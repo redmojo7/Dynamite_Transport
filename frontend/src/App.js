@@ -8,7 +8,7 @@ function App() {
   return (
     <Container>
       <Row>
-        <h1>Truck Tracker</h1>
+        <h1>Dynamite Transport</h1>
       </Row>
       <TruckManager />
     </Container>
