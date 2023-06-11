@@ -1,54 +1,33 @@
-import React from 'react';
-import { Card, Row, Table, Button, Image, Container } from 'react-bootstrap';
-const truckImage = 'container-truck.png';
+import React, { Component } from 'react';
+import { Container, Table } from 'react-bootstrap';
+import Truck from './Truck';
 
-const Truck = ({ truck, onDelete }) => {
-    const handleDelete = () => {
-        onDelete(truck.id);
-    };
+class Trucks extends Component {
 
-    const formattedArrival = new Date(truck.arrival).toLocaleString();
-    //const formattedDeparture = new Date(truck.departure).toLocaleString();
+    render() {
+        const { trucks, onDelete, onUpdate } = this.props;
+        const occupiedBays = this.props.occupiedBays;
 
-    const { id, registration, bay } = truck;
-
-    return (
-        <tr key={id}>
-            <td>
-                <Image className="truck-img" src={truckImage} alt="Truck" />
-                {registration}
-            </td>
-            <td>{formattedArrival}</td>
-            {/* <td>{formattedDeparture}</td> */}
-            <td>{bay}</td>
-            <td>
-                <Button variant="danger" onClick={() => handleDelete(id)}>X</Button>
-            </td>
-        </tr>
-    );
-};
-
-const Trucks = ({ trucks, onDelete }) => {
-    return (
-        <Container className='text-center'>
-            <Table bordered >
-                <thead>
-                    <tr>
-                        <th className="col-3">Registration</th>
-                        <th className="col-5">Arrival</th>
-                        {/* <th>Departure</th> */}
-                        <th className="col-1">Bay</th>
-                        <th className="col-1">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {trucks.map((truck) => (
-                        <Truck key={truck.id} truck={truck} onDelete={onDelete} />
-                    ))}
-                </tbody>
-            </Table>
-        </Container>
-    );
-};
+        return (
+            <Container className="text-center">
+                <Table bordered>
+                    <thead>
+                        <tr>
+                            <th className="col-3">Registration</th>
+                            <th className="col-4">Arrival</th>
+                            <th className="col-1">Bay</th>
+                            <th className="col-4">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {trucks.map((truck) => (
+                            <Truck key={truck.id} occupiedBays={occupiedBays} truck={truck} onDelete={onDelete} onUpdate={onUpdate} />
+                        ))}
+                    </tbody>
+                </Table>
+            </Container>
+        );
+    }
+}
 
 export default Trucks;

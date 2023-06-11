@@ -11,9 +11,9 @@ export const getTrucks = async () => {
     }
 };
 
-export const updateTruck = async (truckId, updatedTruckData) => {
+export const updateTruck = async (truck) => {
     try {
-        const response = await axios.put(`${baseURL}/${truckId}`, updatedTruckData);
+        const response = await axios.put(`${baseURL}/${truck.id}`, truck);
         return response.data;
     } catch (error) {
         throw new Error('Error occurred during PUT request');

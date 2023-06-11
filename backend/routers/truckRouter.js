@@ -28,21 +28,35 @@ truckRouter.post('/', (req, res) => {
     res.json(trucksData);
 });
 
-// PUT /api/trucks/:id
 truckRouter.put('/:id', (req, res) => {
     // Get the truck id from the request params
     const truckId = req.params.id;
+    // Get the updated truck data from the request body
+    const updatedTruckData = req.body;
+
     const truck = trucksData.find((t) => t.id === truckId);
     if (!truck) {
         return res.status(404).json({ error: 'Truck not found' });
     }
-    if (truck.departure) {
-        departedTrucksData.push(truck);
-        trucksData = trucksData.filter((t) => t.id !== truckId);
+
+    // Update the truck data
+    truck.registration = updatedTruckData.registration;
+    truck.bay = updatedTruckData.bay;
+    // Update the departure field if provided in the updatedTruckData
+    if (updatedTruckData.departure) {
+        truck.departure = updatedTruckData.departure;
     }
+
+    // If the truck has departed, remove it from the trucksData array and add it to the departedTrucksData array
+    if (truck.departure) {
+        trucksData.splice(trucksData.indexOf(truck), 1);
+        departedTrucksData.push(truck);
+    }
+
     // Return the updated trucksData as the response
     res.json(trucksData);
 });
+
 
 
 // DELETE /api/trucks/:id

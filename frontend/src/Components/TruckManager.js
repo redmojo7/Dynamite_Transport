@@ -67,6 +67,21 @@ class TruckManager extends Component {
         }
     };
 
+    handleUpdateTruck = async (truck) => {
+        console.log('Updating truck:', truck);
+        try {
+            const trucks = await updateTruck(truck);
+            console.log('All trucks:', trucks);
+            // Update the state to add the new truck to the list
+            this.setState({ trucks: trucks });
+            // Set success response
+            this.setResponse('success', 'Truck updated successfully');
+        } catch (error) {
+            console.error('Error occurred during truck update:', error);
+            this.setResponse('error', error.response.data.error);
+        }
+    }
+
     handleDeleteTruck = (truckId) => {
         // TODO: Implement logic to delete the truck with the specified ID from the backend server
         console.log('Deleting truck:', truckId);
@@ -96,11 +111,13 @@ class TruckManager extends Component {
                 </Row>
                 <Row>
                     <Col sm={6}>
-                        <Trucks trucks={trucks} onDelete={this.handleDeleteTruck} />
+                        <Trucks occupiedBays={this.state.occupiedBays} trucks={trucks} onDelete={this.handleDeleteTruck} onUpdate={this.handleUpdateTruck} />
                     </Col>
                     <Col sm={{ span: 4, offset: 1 }}>
                         <h2>Add Truck</h2>
+                        
                         <TruckForm occupiedBays={this.state.occupiedBays} onAddTruck={this.handleAddTruck} response={this.state.response} />
+    
                     </Col>
                 </Row>
             </Container>
