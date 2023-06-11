@@ -1,17 +1,19 @@
 import './App.css';
-import { Container, Row } from 'react-bootstrap';
-import Truck from './Components/Truck';
-import TruckManager from './Components/TruckManager';
+import TruckManager from './components/TruckManager';
+import NavigationBar from './components/NavigationBar';
+import Cover from './components/Cover';
+import Footer from './components/Footer';
 
 function App() {
 
   return (
-    <Container>
-      <Row>
-        <h1>Dynamite Transport</h1>
-      </Row>
+    <div>
+      <NavigationBar/>
+      <Cover/>
       <TruckManager />
-    </Container>
+      <br />
+      <Footer />
+    </div>
   );
 }
 

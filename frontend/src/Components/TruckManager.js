@@ -1,4 +1,4 @@
-import { getTrucks, createTruck, updateTruck, deleteTruck } from '../Controllers/truckController';
+import { getTrucks, createTruck, updateTruck, deleteTruck } from '../controllers/truckController';
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Trucks from './Trucks';
@@ -106,7 +106,7 @@ class TruckManager extends Component {
             <Container>
                 <Row>
                     <Col>
-                        <h1>Truck Manager</h1>
+                        <h1>Onsite Trucks</h1>
                     </Col>
                 </Row>
                 <Row>
