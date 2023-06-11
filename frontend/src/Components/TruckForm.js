@@ -58,7 +58,7 @@ class TruckForm extends Component {
         this.props.onAddTruck({
             ...this.state.truck,
             arrival: new Date(this.state.truck.arrival),
-            departure: new Date(this.state.truck.arrival)
+            departure: new Date(this.state.truck.departure)
         });
     };
 
@@ -100,8 +100,8 @@ class TruckForm extends Component {
         return (
             <Form onSubmit={this.handleSubmit}>
                 {status === 'error' && <Alert variant="danger">{message}</Alert>}
-                <Form.Group controlId="registration">
-                    <Form.Label>Registration</Form.Label>
+                <Form.Group className='mt-3' controlId="registration">
+                    <Form.Label className="fw-bold">Registration</Form.Label>
                     <Form.Control
                         type="text"
                         name="registration"
@@ -109,8 +109,8 @@ class TruckForm extends Component {
                         onChange={(event) => this.handleChange(event.target.value, 'registration')}
                     />
                 </Form.Group>
-                <Form.Group controlId="arrival">
-                    <Form.Label>Arrival</Form.Label>
+                <Form.Group  className='mt-3' controlId="arrival">
+                    <Form.Label className="fw-bold">Arrival</Form.Label>
                     <DatePicker
                         selected={truck.arrival}
                         onChange={(date) => this.handleChange(date, 'arrival')}
@@ -122,8 +122,8 @@ class TruckForm extends Component {
                     />
                 </Form.Group>
                 {truck.id && (
-                    <Form.Group controlId="departure">
-                        <Form.Label>Departure</Form.Label>
+                    <Form.Group className='mt-3' controlId="departure">
+                        <Form.Label className="fw-bold">Departure</Form.Label>
                         <DatePicker
                             selected={truck.departure}
                             onChange={(date) => this.handleChange(date, 'departure')}
@@ -135,8 +135,8 @@ class TruckForm extends Component {
                         />
                     </Form.Group>
                 )}
-                <Form.Group controlId="bay">
-                    <Form.Label>Bay#</Form.Label>
+                <Form.Group className='mt-3' controlId="bay">
+                    <Form.Label className="fw-bold">Bay#</Form.Label>
                     <Form.Control
                         as="select"
                         name="bay"

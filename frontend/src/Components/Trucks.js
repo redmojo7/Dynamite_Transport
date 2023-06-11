@@ -15,8 +15,8 @@ class Trucks extends Component {
                         <tr>
                             <th className="col-3">Registration</th>
                             <th className="col-4">Arrival</th>
-                            <th className="col-1">Bay</th>
-                            <th className="col-4">Action</th>
+                            <th className="col-1">Bay#</th>
+                            <th className="col-4">Actions</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -6,9 +6,14 @@ const { v4: uuidv4 } = require('uuid');
 
 // GET /api/trucks
 truckRouter.get('/', (req, res) => {
-
     // Return the trucks data as JSON response
     res.json(trucksData);
+});
+
+// GET /api/trucks
+truckRouter.get('/departed', (req, res) => {
+    // Return the departed trucks data as JSON response
+    res.json(departedTrucksData);
 });
 
 // POST /api/trucks
@@ -28,6 +33,7 @@ truckRouter.post('/', (req, res) => {
     res.json(trucksData);
 });
 
+// PUT /api/trucks/:id
 truckRouter.put('/:id', (req, res) => {
     // Get the truck id from the request params
     const truckId = req.params.id;
@@ -41,6 +47,7 @@ truckRouter.put('/:id', (req, res) => {
 
     // Update the truck data
     truck.registration = updatedTruckData.registration;
+    truck.arrival = updatedTruckData.arrival;
     truck.bay = updatedTruckData.bay;
     // Update the departure field if provided in the updatedTruckData
     if (updatedTruckData.departure) {
