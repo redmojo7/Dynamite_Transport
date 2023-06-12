@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Image } from 'react-bootstrap';
+import { Button, Image, Row, Col, Container } from 'react-bootstrap';
 import TruckModal from './TruckModal';
 
-const truckImage = "container-truck.png"
+const truckImage = "truck.png"
 
 class Truck extends Component {
     constructor(props) {
@@ -35,32 +35,33 @@ class Truck extends Component {
         const { showModal } = this.state;
         const formattedArrival = new Date(truck.arrival).toLocaleString();
         const occupiedBays = this.props.occupiedBays;
-        
+
         return (
-            <>
-                <tr key={truck.id}>
-                    <td>
-                        <Image className="truck-img" src={truckImage} alt="Truck" />
+            <div>
+                <hr />
+                <Row key={truck.id} className="mt-2">
+                    <Col sm={3}>
+                        <Image className="truck-img" src={truckImage} alt="Truck" />&nbsp;&nbsp;
                         {truck.registration}
-                    </td>
-                    <td>{formattedArrival}</td>
-                    <td>{truck.bay}</td>
-                    <td>
-                        <Button variant="info" onClick={this.openModal}>Update</Button>
+                    </Col>
+                    <Col sm={4}>{formattedArrival}</Col>
+                    <Col sm={1}>{truck.bay}</Col>
+                    <Col sm={4}>
+                        <Button size="sm" variant="info" onClick={this.openModal}>Update</Button>
                         &nbsp;
-                        <Button variant="danger" onClick={this.handleDelete}>X</Button>
-                    </td>
-                </tr>
+                        <Button size="sm" variant="danger" onClick={this.handleDelete}>X</Button>
+                    </Col>
+                </Row>
 
                 {showModal && (
-                    <TruckModal 
-                        truck={truck} 
-                        occupiedBays={occupiedBays} 
+                    <TruckModal
+                        truck={truck}
+                        occupiedBays={occupiedBays}
                         onClose={this.closeModal}
                         onUpdate={this.handleUpdateTruck}
                         response={this.state.response} />
                 )}
-            </>
+            </div>
         );
     }
 }

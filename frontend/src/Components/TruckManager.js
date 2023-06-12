@@ -110,14 +110,13 @@ class TruckManager extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col sm={6}>
+                   
+                    <Col sm={6} className="mx-auto">
                         <Trucks occupiedBays={this.state.occupiedBays} trucks={trucks} onDelete={this.handleDeleteTruck} onUpdate={this.handleUpdateTruck} />
                     </Col>
                     <Col sm={{ span: 4, offset: 1 }}>
                         <h2>Add Truck</h2>
-                        
                         <TruckForm occupiedBays={this.state.occupiedBays} onAddTruck={this.handleAddTruck} response={this.state.response} />
-    
                     </Col>
                 </Row>
             </Container>
