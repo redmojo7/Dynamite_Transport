@@ -4,7 +4,7 @@ const { Container, Row, Col, ListGroup } = require("react-bootstrap")
 const Footer = () => {
 
   return (
-    <div className="footer py-3 bg-dark">
+    <div className="footer py-3 bg-dark mt-4">
       <Container>
         <Row>
           <Col md={3}>

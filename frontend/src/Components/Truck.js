@@ -34,21 +34,22 @@ class Truck extends Component {
         const { truck } = this.props;
         const { showModal } = this.state;
         const formattedArrival = new Date(truck.arrival).toLocaleString();
+        const formattedDeparture = truck.departure ? new Date(truck.departure).toLocaleString() : null;
         const occupiedBays = this.props.occupiedBays;
 
         return (
             <div>
                 <hr />
                 <Row key={truck.id} className="mt-2">
-                    <Col sm={3}>
-                        <Image className="truck-img" src={truckImage} alt="Truck" />&nbsp;&nbsp;
-                        {truck.registration}
+                    <Col sm={2} >
+                        <Image className="truck-img" src={truckImage} alt="Truck" />
+                        <br />{truck.registration}
                     </Col>
-                    <Col sm={4}>{formattedArrival}</Col>
-                    <Col sm={1}>{truck.bay}</Col>
-                    <Col sm={4}>
-                        <Button size="sm" variant="info" onClick={this.openModal}>Update</Button>
-                        &nbsp;
+                    <Col sm={3} className="text-center d-flex align-items-center justify-content-center">{formattedArrival}</Col>
+                    <Col sm={3} className="text-center d-flex align-items-center justify-content-center">{formattedDeparture}</Col>
+                    <Col sm={1} className="text-center d-flex align-items-center justify-content-center">{truck.bay}</Col>
+                    <Col sm={3} className="text-center d-flex align-items-center justify-content-center">
+                        {truck.departure ? "" : <Button size="sm" variant="info" onClick={this.openModal}>Update</Button>}&nbsp;
                         <Button size="sm" variant="danger" onClick={this.handleDelete}>X</Button>
                     </Col>
                 </Row>

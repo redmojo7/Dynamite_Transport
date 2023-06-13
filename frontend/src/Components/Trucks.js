@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Table, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import Truck from './Truck';
 
 class Trucks extends Component {
@@ -9,15 +9,16 @@ class Trucks extends Component {
         const occupiedBays = this.props.occupiedBays;
 
         return (
-            <Container className='text-center'>
-                <Row >
-                    <Col sm={3}><h3>Registration</h3></Col>
-                    <Col sm={4}><h3>Arrival</h3></Col>
-                    <Col sm={1}><h3>Bay#</h3></Col>
-                    <Col sm={4}><h3>Actions</h3></Col>  
+            <Container >
+                <Row className='text-center'>
+                    <Col sm={2}><h4>Registration</h4></Col>
+                    <Col sm={3}><h4>Arrival</h4></Col>
+                    <Col sm={3}><h4>Departure</h4></Col>
+                    <Col sm={1}><h4>Bay#</h4></Col>
+                    <Col sm={3}><h4>Actions</h4></Col>
                 </Row>
                 {trucks.map((truck) => (
-                            <Truck key={truck.id} occupiedBays={occupiedBays} truck={truck} onDelete={onDelete} onUpdate={onUpdate} />
+                            <Truck key={truck.id} occupiedBays={occupiedBays} truck={truck} onDelete={onDelete} onUpdate={onUpdate} actions={this.props.actions} />
                         ))}
             </Container>
         );

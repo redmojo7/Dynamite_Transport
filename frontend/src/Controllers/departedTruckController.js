@@ -10,3 +10,12 @@ export const getTruckHistories = async () => {
         throw new Error('Error occurred during GET request');
     }
 };
+
+export const deleteTruckHistory = async (truckId) => {
+    try {
+        const response = await axios.delete(`${baseURL}/${truckId}`);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error occurred during DELETE request');
+    }
+}

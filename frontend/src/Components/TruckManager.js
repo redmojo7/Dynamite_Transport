@@ -6,6 +6,7 @@ import TruckForm from './TruckForm.js';
 
 class TruckManager extends Component {
     state = {
+        bays : 12,
         trucks: [],
         occupiedBays: [],
         response: {
@@ -18,11 +19,8 @@ class TruckManager extends Component {
         // Fetch the initial list of trucks from the backend server
         getTrucks()
             .then((trucksData) => {
-
-
                 this.setState({
                     trucks: trucksData,
-
                 });
             })
             .catch((error) => {
@@ -102,6 +100,7 @@ class TruckManager extends Component {
 
     render() {
         const { trucks } = this.state;
+        const availableBays = this.state.bays - this.state.occupiedBays.length;
         return (
             <Container>
                 <Row>
@@ -109,12 +108,23 @@ class TruckManager extends Component {
                         <h1>Onsite Trucks</h1>
                     </Col>
                 </Row>
+                
+                <Row className='text-center bg-light pt-2'>
+                    <Col sm={3}><h5>Site Name</h5></Col>
+                    <Col sm={3}><h5>Occupied Bays</h5></Col>
+                    <Col sm={3}><h5>Available Bays</h5></Col>
+                </Row>
+                <Row className='text-center bg-light'>
+                    <Col sm={3}><h6>Welshpool</h6></Col>
+                    <Col sm={3}><h6>{this.state.occupiedBays.length}</h6></Col>
+                    <Col sm={3}><h6>{availableBays}</h6></Col>
+                </Row>
+                
                 <Row>
-                   
-                    <Col sm={6} className="mx-auto">
-                        <Trucks occupiedBays={this.state.occupiedBays} trucks={trucks} onDelete={this.handleDeleteTruck} onUpdate={this.handleUpdateTruck} />
+                    <Col sm={8} className="mx-auto">
+                        <Trucks occupiedBays={this.state.occupiedBays} trucks={trucks} onDelete={this.handleDeleteTruck} onUpdate={this.handleUpdateTruck}/>
                     </Col>
-                    <Col sm={{ span: 4, offset: 1 }}>
+                    <Col sm={3} className="bg-light p-4">
                         <h2>Add Truck</h2>
                         <TruckForm occupiedBays={this.state.occupiedBays} onAddTruck={this.handleAddTruck} response={this.state.response} />
                     </Col>

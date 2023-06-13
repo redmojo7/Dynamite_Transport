@@ -27,10 +27,10 @@ truckRouter.post('/', (req, res) => {
     }
 
     truck.id = uuidv4();
-    trucksData.push(truck);
+    trucksData.unshift(truck);
 
     // Return the updated trucksData as the response
-    res.json(trucksData);
+    res.status(201).json(trucksData);
 });
 
 // PUT /api/trucks/:id
@@ -57,7 +57,7 @@ truckRouter.put('/:id', (req, res) => {
     // If the truck has departed, remove it from the trucksData array and add it to the departedTrucksData array
     if (truck.departure) {
         trucksData.splice(trucksData.indexOf(truck), 1);
-        departedTrucksData.push(truck);
+        departedTrucksData.unshift(truck);
     }
 
     // Return the updated trucksData as the response
@@ -80,6 +80,25 @@ truckRouter.delete('/:id', (req, res) => {
         // Send the updated trucksData as the response
         res.json(trucksData);
     } else {
+        // If no truck was found with the specified ID, send an error response
+        res.status(404).json({ error: 'Truck not found' });
+    }
+});
+
+// DELETE /api/trucks/departed/:id
+truckRouter.delete('/departed/:id', (req, res) => {
+    // Get the truck id from the request params
+    const truckId = req.params.id;
+    // Find the index of the truck with the specified ID in the departedTrucksData array
+    const deletedTruckIndex = departedTrucksData.findIndex((truck) => truck.id === truckId);
+    if (deletedTruckIndex !== -1) {
+        // Remove the truck from the departedTrucksData array
+        const deletedTruck = departedTrucksData.splice(deletedTruckIndex, 1)[0];
+        console.log('Deleting truck:', deletedTruck);
+        // Send the updated departedTrucksData as the response
+        res.json(departedTrucksData);
+    }
+    else {
         // If no truck was found with the specified ID, send an error response
         res.status(404).json({ error: 'Truck not found' });
     }
