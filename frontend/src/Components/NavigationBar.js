@@ -11,8 +11,8 @@ const NavigationBar = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link href="#">Home</Nav.Link>
-                        <Nav.Link href="#onsite">Truck(Onsite)</Nav.Link>
-                        <Nav.Link href="#offsite">Truck(Offsite)</Nav.Link>
+                        <Nav.Link href="#onsite">Truck(On-site)</Nav.Link>
+                        <Nav.Link href="#offsite">Truck(Off-site)</Nav.Link>
                         <Nav.Link href="#contat">Contat</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>

@@ -12,6 +12,7 @@ class TruckForm extends Component {
             bay: '',
         },
         formErrors: '',
+        showDeparture: false,
     };
 
     constructor(props) {
@@ -122,7 +123,16 @@ class TruckForm extends Component {
                     />
                 </Form.Group>
                 {truck.id && (
+                    <Form.Check className='mt-3'
+                    type="checkbox"
+                    label="Departured"
+                    checked={this.state.showDeparture}
+                    onChange={(event) => this.setState({ showDeparture: event.target.checked })}
+                    />
+                )}
+                {truck.id && this.state.showDeparture && (
                     <Form.Group className='mt-3' controlId="departure">
+                        <p className="text-muted mt-2">Note: If the truck is marked as departed with a departure time, it will be moved to the Departed trucks.</p>
                         <Form.Label className="fw-bold">Departure</Form.Label>
                         <DatePicker
                             selected={truck.departure}

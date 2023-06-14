@@ -34,7 +34,7 @@ class Truck extends Component {
         const { truck } = this.props;
         const { showModal } = this.state;
         const formattedArrival = new Date(truck.arrival).toLocaleString();
-        const formattedDeparture = truck.departure ? new Date(truck.departure).toLocaleString() : null;
+        const formattedDeparture = truck.departure ? new Date(truck.departure).toLocaleString() : "---";
         const occupiedBays = this.props.occupiedBays;
 
         return (

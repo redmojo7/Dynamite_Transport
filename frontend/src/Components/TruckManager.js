@@ -119,8 +119,7 @@ class TruckManager extends Component {
                     <Col sm={3}><h6>{this.state.occupiedBays.length}</h6></Col>
                     <Col sm={3}><h6>{availableBays}</h6></Col>
                 </Row>
-                
-                <Row>
+                <Row className='mt-2'>
                     <Col sm={8} className="mx-auto">
                         <Trucks occupiedBays={this.state.occupiedBays} trucks={trucks} onDelete={this.handleDeleteTruck} onUpdate={this.handleUpdateTruck}/>
                     </Col>
