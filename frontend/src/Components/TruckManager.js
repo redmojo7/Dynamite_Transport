@@ -1,18 +1,20 @@
 import { getTrucks, createTruck, updateTruck, deleteTruck } from '../controllers/truckController';
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button, Modal } from 'react-bootstrap';
 import Trucks from './Trucks';
 import TruckForm from './TruckForm.js';
 
 class TruckManager extends Component {
     state = {
-        bays : 12,
+        bays: 12,
+        selectedTruck: {},
         trucks: [],
         occupiedBays: [],
         response: {
             status: '',
             message: '',
         },
+        showMoveModal: false,
     };
 
     componentDidMount() {
@@ -73,6 +75,13 @@ class TruckManager extends Component {
             this.setState({ trucks: trucks });
             // Set success response
             this.setResponse('success', 'Truck updated successfully');
+            // Check if the updated truck is in the list of trucks
+            if (trucks.every((t) => t.id !== truck.id)) {
+                // Show the modal (going to departed truck)
+                this.setState({ 
+                    selectedTruck: truck,
+                    showMoveModal: true });
+            }
         } catch (error) {
             console.error('Error occurred during truck update:', error);
             this.setResponse('error', error.response.data.error);
@@ -92,8 +101,22 @@ class TruckManager extends Component {
             });
     };
 
+    handleCancelMove = () => {
+        this.setState({ showMoveModal: false });
+        console.log('Going to departed trucks cancelled');
+    };
+
+    handleGotoDepartedTrucks = () => {
+        this.setState({ showMoveModal: false });
+        console.log('Going to departed trucks');
+        // Scroll to the top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        this.props.setCurrentPageKey('departedtruck');
+    };
+
+
     render() {
-        const { trucks } = this.state;
+        const { trucks, showMoveModal } = this.state;
         const availableBays = this.state.bays - this.state.occupiedBays.length;
         return (
             <Container>
@@ -114,13 +137,30 @@ class TruckManager extends Component {
                 </Row>
                 <Row className='mt-2'>
                     <Col sm={8} className="mx-auto">
-                        <Trucks occupiedBays={this.state.occupiedBays} trucks={trucks} onDelete={this.handleDeleteTruck} onUpdate={this.handleUpdateTruck}/>
+                        <Trucks occupiedBays={this.state.occupiedBays} trucks={trucks} onDelete={this.handleDeleteTruck} onUpdate={this.handleUpdateTruck} />
                     </Col>
                     <Col sm={3} className="bg-light p-4">
                         <h2>Add Truck</h2>
                         <TruckForm occupiedBays={this.state.occupiedBays} onAddTruck={this.handleAddTruck} response={this.state.response} />
                     </Col>
                 </Row>
+                {showMoveModal && (
+                    <Modal show={showMoveModal} onHide={this.handleCancelMove}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Move to Departed Trucks</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <p>Do you want to go to Departed Trucks to view truck (<strong>{this.state.selectedTruck.registration}</strong>)?</p>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={this.handleCancelMove}>
+                                Cancel
+                            </Button>
+                            <Button variant="primary" onClick={() => this.handleGotoDepartedTrucks()}>
+                                OK
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>)}
             </Container>
         );
     }

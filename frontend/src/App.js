@@ -12,14 +12,16 @@ import TruckManager from "./components/TruckManager";
 import DepartedTruckManager from "./components/DepartedTruckManager";
 import Contact from "./components/Contact";
 
-const routes = [
-  { key: "truck", label: "On-site Trucks", component: <TruckManager /> },
-  { key: "departedtruck", label: "Departed Trucks", component: <DepartedTruckManager /> },
-  { key: "contact", label: "Contact", component: <Contact /> },
-];
 
 function App () {
+  
   const [currentPageKey, setCurrentPageKey] = useState("truck");
+
+  const routes = [
+    { key: "truck", label: "On-site Trucks", component: <TruckManager setCurrentPageKey={setCurrentPageKey}/> },
+    { key: "departedtruck", label: "Departed Trucks", component: <DepartedTruckManager /> },
+    { key: "contact", label: "Contact", component: <Contact /> },
+  ];
 
   const getCurrentPageComponent = () => {
     const selectedRoute = routes.find((route) => route.key === currentPageKey);

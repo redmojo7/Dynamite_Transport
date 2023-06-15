@@ -8,28 +8,28 @@
   },
   {
     "id": "15f8e2a9-32e7-4d8a-b4cd-78fca9e8df2f",
-    "registration": "1ABC456",
+    "registration": "1DDD222",
     "arrival": "2023-06-03T09:15:00",
     "departure": null,
     "bay": "2"
   },
   {
     "id": "36e11e01-775e-4c44-a2fe-7a2f8efc327a",
-    "registration": "1ABC789",
+    "registration": "1EEE777",
     "arrival": "2023-06-05T10:30:00",
     "departure": null,
     "bay": "3"
   },
   {
     "id": "7b07f2f5-9cc1-4689-9316-3b73a7197952",
-    "registration": "1ABC012",
+    "registration": "1RRR888",
     "arrival": "2023-06-07T11:45:00",
     "departure": null,
     "bay": "4"
   },
   {
     "id": "aa6a5932-2b23-4a7e-9293-ef9a366a13f7",
-    "registration": "1ABC345",
+    "registration": "1KKK000",
     "arrival": "2023-06-09T13:00:00",
     "departure": null,
     "bay": "5"

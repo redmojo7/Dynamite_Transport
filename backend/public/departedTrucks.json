@@ -1,35 +1,35 @@
 [
     {
-        "id": "e23b4a0d-9dd7-4e8f-b7b9-0e580678a8e1",
-        "registration": "1ABC123",
+        "id": "2c74684e-5e8d-4de6-9ae0-1e17ce87654f",
+        "registration": "1XXX111",
         "arrival": "2023-06-01T08:00:00",
         "departure": "2023-06-02T16:30:00",
         "bay": "1"
     },
     {
-        "id": "15f8e2a9-32e7-4d8a-b4cd-78fca9e8df2f",
-        "registration": "1ABC456",
+        "id": "4f096aeb-0139-4419-9d0e-6a537d6f3d48",
+        "registration": "1HYU111",
         "arrival": "2023-06-03T09:15:00",
         "departure": "2023-06-04T17:45:00",
         "bay": "2"
     },
     {
-        "id": "36e11e01-775e-4c44-a2fe-7a2f8efc327a",
-        "registration": "1ABC789",
+        "id": "907f523b-8f57-4c5a-927b-380a22a894d3",
+        "registration": "1QAZ098",
         "arrival": "2023-06-05T10:30:00",
         "departure": "2023-06-06T18:00:00",
         "bay": "3"
     },
     {
-        "id": "7b07f2f5-9cc1-4689-9316-3b73a7197952",
-        "registration": "1ABC012",
+        "id": "b3e7a7d7-665a-49f9-b976-9272b894c5fe",
+        "registration": "1DDD222",
         "arrival": "2023-06-07T11:45:00",
         "departure": "2023-06-08T19:30:00",
         "bay": "4"
     },
     {
-        "id": "aa6a5932-2b23-4a7e-9293-ef9a366a13f7",
-        "registration": "1ABC345",
+        "id": "c8b1d9e2-31d5-4fb3-8359-9f313d4c0f49",
+        "registration": "1FRD451",
         "arrival": "2023-06-09T13:00:00",
         "departure": "2023-06-10T21:15:00",
         "bay": "5"

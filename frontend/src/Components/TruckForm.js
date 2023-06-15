@@ -24,7 +24,7 @@ class TruckForm extends Component {
                     id,
                     registration,
                     arrival: Date.parse(arrival),
-                    departure: Date.parse(departure),
+                    departure: Date.parse(departure) || '',
                     bay,
                 },
                 formErrors: '',
@@ -40,9 +40,6 @@ class TruckForm extends Component {
             },
             formErrors: '',
         }));
-        if (this.state.truck.arrival <= this.state.truck.departure) {
-            this.setState({ formErrors: '' });
-        }
     };
 
     handleSubmit = async (event) => {
@@ -113,7 +110,7 @@ class TruckForm extends Component {
                         onChange={(event) => this.handleChange(event.target.value, 'registration')}
                     />
                 </Form.Group>
-                <Form.Group  className='mt-3' controlId="arrival">
+                <Form.Group className='mt-3' controlId="arrival">
                     <Form.Label className="fw-bold">Arrival</Form.Label>
                     <DatePicker
                         selected={truck.arrival}
@@ -127,10 +124,10 @@ class TruckForm extends Component {
                 </Form.Group>
                 {truck.id && (
                     <Form.Check className='mt-3'
-                    type="checkbox"
-                    label="Departured"
-                    checked={this.state.showDeparture}
-                    onChange={(event) => this.setState({ showDeparture: event.target.checked })}
+                        type="checkbox"
+                        label="Departured"
+
+                        onChange={(event) => this.setState({ showDeparture: event.target.checked })}
                     />
                 )}
                 {truck.id && this.state.showDeparture && (
