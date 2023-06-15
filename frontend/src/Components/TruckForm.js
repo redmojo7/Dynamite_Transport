@@ -40,13 +40,16 @@ class TruckForm extends Component {
             },
             formErrors: '',
         }));
+        if (this.state.truck.arrival <= this.state.truck.departure) {
+            this.setState({ formErrors: '' });
+        }
     };
 
     handleSubmit = async (event) => {
         event.preventDefault();
         // Check if any required fields are empty
-        const { registration, arrival, bay } = this.state.truck;
-        if (!registration || !arrival || !bay) {
+        const { registration, arrival, departure, bay } = this.state.truck;
+        if (!registration || !arrival || !bay || (this.showDeparture && !departure)) {
             // Handle the empty field case
             console.log('Please fill in all fields.');
             this.setState({
@@ -132,7 +135,7 @@ class TruckForm extends Component {
                 )}
                 {truck.id && this.state.showDeparture && (
                     <Form.Group className='mt-3' controlId="departure">
-                        <p className="text-muted mt-2">Note: If the truck is marked as departed with a departure time, it will be moved to the Departed trucks.</p>
+                        <p className="text-muted mt-2">Note: If the truck is marked as departed with a departure time, it will be moved to the Departed Trucks.</p>
                         <Form.Label className="fw-bold">Departure</Form.Label>
                         <DatePicker
                             selected={truck.departure}

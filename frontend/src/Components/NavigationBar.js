@@ -1,23 +1,24 @@
 import React from "react";
-import { Navbar, Nav, Container} from 'react-bootstrap';
+import { Navbar, Nav, Container } from 'react-bootstrap';
 
-// Stateless Functional Component - NavigationBar
-const NavigationBar = () => {
+const NavigationBar = ({ setCurrentPageKey }) => {
+    const navigate = (eventKey) => {
+        setCurrentPageKey(eventKey);
+    };
     return (
         <Navbar className='bg-light'>
             <Container>
                 <Navbar.Brand href="#">Dynamite Transport</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="mr-auto">
-                        <Nav.Link href="#">Home</Nav.Link>
-                        <Nav.Link href="#onsite">Truck(On-site)</Nav.Link>
-                        <Nav.Link href="#offsite">Truck(Off-site)</Nav.Link>
-                        <Nav.Link href="#contat">Contat</Nav.Link>
+                    <Nav className="mr-auto" onSelect={navigate}>
+                        <Nav.Link eventKey="truck">Truck(On-site)</Nav.Link>
+                        <Nav.Link eventKey="departedtruck">Truck(Off-site)</Nav.Link>
+                        <Nav.Link eventKey="contact">Contact</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
-        </Navbar>   
+        </Navbar>
     );
 }
 

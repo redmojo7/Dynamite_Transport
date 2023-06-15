@@ -25,7 +25,6 @@ class TruckManager extends Component {
             })
             .catch((error) => {
                 console.error('Error occurred during GET request:', error);
-                // Handle the error state
             });
     }
 
@@ -84,18 +83,13 @@ class TruckManager extends Component {
         // TODO: Implement logic to delete the truck with the specified ID from the backend server
         console.log('Deleting truck:', truckId);
         // Update the state to remove the truck from the list
-
         deleteTruck(truckId)
             .then((trucksData) => {
                 this.setState({ trucks: trucksData });
             })
             .catch((error) => {
                 console.error('Error occurred during DELETE request:', error);
-                // Handle the error state
             });
-        //this.setState((prevState) => ({
-        //    trucks: prevState.trucks.filter((truck) => truck.id !== truckId),
-        //}));
     };
 
     render() {
@@ -108,7 +102,6 @@ class TruckManager extends Component {
                         <h1>Onsite Trucks</h1>
                     </Col>
                 </Row>
-                
                 <Row className='text-center bg-light pt-2'>
                     <Col sm={3}><h5>Site Name</h5></Col>
                     <Col sm={3}><h5>Occupied Bays</h5></Col>
