@@ -3,10 +3,12 @@ import { Navbar, Nav, Container } from 'react-bootstrap';
 
 const NavigationBar = ({ setCurrentPageKey }) => {
     const navigate = (eventKey) => {
+        // Scroll to the top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         setCurrentPageKey(eventKey);
     };
     return (
-        <Navbar className='bg-light'>
+        <Navbar className='bg-light sticky-top'>
             <Container>
                 <Navbar.Brand href="#">Dynamite Transport</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
