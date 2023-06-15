@@ -125,12 +125,12 @@ class TruckManager extends Component {
                         <h1>Onsite Trucks</h1>
                     </Col>
                 </Row>
-                <Row className='text-center bg-light pt-2'>
+                <Row className='text-center pt-2'>
                     <Col sm={3}><h5>Site Name</h5></Col>
                     <Col sm={3}><h5>Occupied Bays</h5></Col>
                     <Col sm={3}><h5>Available Bays</h5></Col>
                 </Row>
-                <Row className='text-center bg-light'>
+                <Row className='text-center '>
                     <Col sm={3}><h6>Welshpool</h6></Col>
                     <Col sm={3}><h6>{this.state.occupiedBays.length}</h6></Col>
                     <Col sm={3}><h6>{availableBays}</h6></Col>

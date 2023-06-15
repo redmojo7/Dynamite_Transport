@@ -10,7 +10,7 @@ class Trucks extends Component {
 
         return (
             <Container >
-                <Row className='text-center'>
+                <Row className='text-center sticky-top bg-light' style={{top:'55px'}}>
                     <Col sm={2}><h4>Registration</h4></Col>
                     <Col sm={3}><h4>Arrival</h4></Col>
                     <Col sm={3}><h4>Departure</h4></Col>

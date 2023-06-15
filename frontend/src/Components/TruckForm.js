@@ -161,7 +161,7 @@ class TruckForm extends Component {
                         ))}
                     </Form.Control>
                 </Form.Group>
-                {formErrors && <Alert variant="danger">{formErrors}</Alert>}
+                {formErrors && <Alert className='mt-2' variant="danger" >{formErrors}</Alert>}
                 {truck.id && (
                     <Button className="mt-4 float-start" variant="secondary" onClick={this.onClose}>
                         Cancel
