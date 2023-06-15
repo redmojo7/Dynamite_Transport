@@ -33,6 +33,7 @@ class TruckForm extends Component {
     }
 
     handleChange = (value, field) => {
+        //console.log('handleChange value:', value, "field:", field);
         this.setState((prevState) => ({
             truck: {
                 ...prevState.truck,
@@ -40,6 +41,7 @@ class TruckForm extends Component {
             },
             formErrors: '',
         }));
+        //console.log('handleChange this.state.truck:', this.state.truck);
     };
 
     handleSubmit = async (event) => {
@@ -66,7 +68,7 @@ class TruckForm extends Component {
     componentDidUpdate(prevProps) {
         const { status } = this.props.response;
         // Check if the response status changed to "success"
-        if (status === 'success' && prevProps.response.status !== 'success') {
+        if (status === 'success' && prevProps.response.id !== this.props.response.id) {
             // Clear the form state
             this.setState({
                 truck: {

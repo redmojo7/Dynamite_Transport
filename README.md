@@ -19,7 +19,6 @@ Dynamite_Transport is a web application to allow freight network managers to man
 - Backend:
   - Node.js
   - Express
-  - MongoDB
 
 ## Getting Started
 

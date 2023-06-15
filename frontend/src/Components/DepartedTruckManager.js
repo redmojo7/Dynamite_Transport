@@ -23,16 +23,12 @@ class DepartedTruckManager extends Component {
             });
     }
 
-    handleDeleteTruck = (truckId) => {
+    handleDeleteTruck = async (truckId) => {
         // TODO: Implement logic to delete the truck with the specified ID from the backend server
         console.log('Deleting truck:', truckId);
-        deleteTruckHistory(truckId).then((trucksData) => {
-            this.setState({
-                trucks: trucksData,
-            });
-        }).catch((error) => {
-            console.error('Error occurred during DELETE request:', error);
-        });
+        const deletedTruckHis = await deleteTruckHistory(truckId);
+        const trucks = await getTruckHistories();
+        this.setState({ trucks });
     };
 
     render() {

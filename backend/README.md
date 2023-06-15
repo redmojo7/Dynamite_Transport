@@ -6,15 +6,12 @@ This is the backend component of the Dynamite_Transport project. It provides the
 
 - [Node.js](https://nodejs.org): JavaScript runtime environment
 - [Express.js](https://expressjs.com): Web application framework for Node.js
-- [MongoDB](https://www.mongodb.com): NoSQL database for storing truck data
-- [Mongoose](https://mongoosejs.com): MongoDB object modeling for Node.js
 
 ## Getting Started
 
 ### Prerequisites
 
 - Node.js (version X.X.X)
-- MongoDB (version X.X.X)
 
 ### Installation
 
