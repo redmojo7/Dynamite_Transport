@@ -12,32 +12,14 @@ class TruckModal extends Component {
         };
     }
 
-
-    handleUpdate = () => {
-        const { updatedTruck } = this.state;
-        // Check if the arrival date is after the departure date
-        console.log('updatedTruck info:', updatedTruck);
-        if (updatedTruck.departure && updatedTruck.arrival > updatedTruck.departure) {
-            console.log('Arrival date must be before departure date.');
-            this.setState({
-                response: {
-                    status: 'error',
-                    message: 'Arrival date must be before departure date.'
-                }
-            });
-            return;
-        }
-        this.props.onUpdate(updatedTruck);
-        this.props.onClose();
-    };
-
-    handleAddTruck = (truckForm) => {
+    handleCreatOrUpdateTruck = (truckForm) => {
         console.log('handleAddTruck truckForm:', truckForm);
         // Check if the arrival date is after the departure date
         if (truckForm.departure && truckForm.arrival > truckForm.departure) {
             console.log('Arrival date must be before departure date.');
             this.setState({
                 response: {
+                    id: new Date().getTime(),
                     status: 'error',
                     message: 'Arrival date must be before departure date.'
                 }
@@ -61,21 +43,11 @@ class TruckModal extends Component {
                     <TruckForm
                         occupiedBays={occupiedBays}
                         truck={updatedTruck}
-                        onAddTruck={this.handleAddTruck}
+                        onCreatOrUpdateTruck={this.handleCreatOrUpdateTruck}
                         response={response}
                         onClose={onClose}
                     />
                 </Modal.Body>
-                {/*
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={onClose}>
-                        Cancel
-                    </Button>
-                    <Button variant="primary" onClick={this.handleUpdate}>
-                        {updatedTruck.id ? 'Update' : 'Add'}
-                    </Button>
-                </Modal.Footer>
-        */}
             </Modal>
         );
     }

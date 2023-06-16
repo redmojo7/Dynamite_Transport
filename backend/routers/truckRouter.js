@@ -36,9 +36,9 @@ truckRouter.post('/', (req, res) => {
         bay
     };
     trucksData.unshift(newTruck);
-
-    // Return the new truck
-    res.status(201).json(newTruck);
+    console.log('Adding truck:', newTruck);
+    // redirect to /api/trucks
+    res.redirect(303, '/api/trucks');
 });
 
 // PUT /api/trucks/:id
@@ -57,14 +57,14 @@ truckRouter.put('/:id', (req, res) => {
     truck.departure = departure;
     truck.registration = registration;
     truck.bay = bay;
-
+    console.log('Updating truck:', truck);
     // If the truck has departed, remove it from the trucksData array and add it to the departedTrucksData array
     if (truck.departure) {
         trucksData.splice(trucksData.indexOf(truck), 1);
         departedTrucksData.unshift(truck);
     }
-    // Return the updated trucksData as the response
-    res.json(truck);
+    // redirect to /api/trucks
+    res.redirect(303, '/api/trucks');
 });
 
 // DELETE /api/trucks/:id
@@ -78,8 +78,8 @@ truckRouter.delete('/:id', (req, res) => {
         // Remove the truck from the trucksData array
         const deletedTruck = trucksData.splice(deletedTruckIndex, 1)[0];
         console.log('Deleting truck:', deletedTruck);
-        // Send the deleted truck
-        res.json(deletedTruck);
+        // redirect to /api/trucks
+        res.redirect(303, '/api/trucks');
     } else {
         // If no truck was found with the specified ID, send an error response
         res.status(404).json({ error: 'Truck not found' });
@@ -95,9 +95,9 @@ truckRouter.delete('/departed/:id', (req, res) => {
     if (deletedTruckIndex !== -1) {
         // Remove the truck from the departedTrucksData array
         const deletedTruck = departedTrucksData.splice(deletedTruckIndex, 1)[0];
-        console.log('Deleting truck:', deletedTruck);
-        // Send the deleted truck
-        res.json(deletedTruck);
+        console.log('Deleting deletedTruck:', deletedTruck);
+        // redirect to /api/trucks/departed
+        res.redirect(303, '/api/trucks/departed');
     }
     else {
         // If no truck was found with the specified ID, send an error response

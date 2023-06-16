@@ -1,34 +1,35 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Trucks from './Trucks';
-import { getTruckHistories, deleteTruckHistory } from '../controllers/departedTruckController';
+import { getDepartedTrucks, deleteDepartedTrucks } from '../controllers/departedTruckController';
 
 
 class DepartedTruckManager extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
     state = {
         trucks: [],
     };
 
     componentDidMount() {
         // Fetch the initial list of trucks from the backend server
-        getTruckHistories()
-            .then((trucksData) => {
-                this.setState({
-                    trucks: trucksData,
-                });
+        getDepartedTrucks()
+            .then((departedTrucks) => {
+                this.setState({trucks: departedTrucks});
             })
             .catch((error) => {
                 console.error('Error occurred during GET request:', error);
-                // Handle the error state
             });
     }
 
     handleDeleteTruck = async (truckId) => {
-        // TODO: Implement logic to delete the truck with the specified ID from the backend server
+        // Delete the truck from the backend server
         console.log('Deleting truck:', truckId);
-        const deletedTruckHis = await deleteTruckHistory(truckId);
-        const trucks = await getTruckHistories();
-        this.setState({ trucks });
+        const departedTrucks = await deleteDepartedTrucks(truckId);
+        this.setState({ trucks: departedTrucks });
     };
 
     render() {

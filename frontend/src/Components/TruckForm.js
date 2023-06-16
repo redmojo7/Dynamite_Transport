@@ -13,6 +13,7 @@ class TruckForm extends Component {
         },
         formErrors: '',
         showDeparture: false,
+        response: {}
     };
 
     constructor(props) {
@@ -28,6 +29,7 @@ class TruckForm extends Component {
                     bay,
                 },
                 formErrors: '',
+                response: props.response,
             };
         }
     }
@@ -40,8 +42,10 @@ class TruckForm extends Component {
                 [field]: value,
             },
             formErrors: '',
+            response: {},
         }));
         //console.log('handleChange this.state.truck:', this.state.truck);
+        
     };
 
     handleSubmit = async (event) => {
@@ -58,7 +62,7 @@ class TruckForm extends Component {
         }
 
         this.setState({ formErrors: '' }); // Clear the formErrors state if all fields are filled
-        this.props.onAddTruck({
+        this.props.onCreatOrUpdateTruck({
             ...this.state.truck,
             arrival: new Date(this.state.truck.arrival),
             departure: new Date(this.state.truck.departure)
@@ -66,7 +70,11 @@ class TruckForm extends Component {
     };
 
     componentDidUpdate(prevProps) {
-        const { status } = this.props.response;
+        if (prevProps.response.id !== this.props.response.id){
+            console.log('componentDidUpdate this.props.response:', this.props.response);
+            this.setState({ response: this.props.response });
+        }
+        const { status } = this.state.response;
         // Check if the response status changed to "success"
         if (status === 'success' && prevProps.response.id !== this.props.response.id) {
             // Clear the form state
@@ -88,7 +96,7 @@ class TruckForm extends Component {
 
     render() {
         const { truck, formErrors } = this.state;
-        const { status, message } = this.props.response;
+        const { status, message } = this.state.response;
         const { truck: selectedTruck, occupiedBays } = this.props;
 
         let filteredOccupiedBays = occupiedBays;

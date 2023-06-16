@@ -13,6 +13,7 @@ export const getTrucks = async () => {
 
 export const updateTruck = async (truck) => {
     try {
+        console.log('con Updating truck:', `${baseURL}/${truck.id}`);
         const response = await axios.put(`${baseURL}/${truck.id}`, truck);
         return response.data;
     } catch (error) {

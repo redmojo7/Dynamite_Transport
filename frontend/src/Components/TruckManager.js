@@ -54,12 +54,9 @@ class TruckManager extends Component {
     handleAddTruck = async (truck) => {
         console.log('Adding truck:', truck);
         try {
-            const newTruck = await createTruck({"arrival":truck.arrival,"bay":truck.bay,"registration":truck.registration});
-            console.log('New truck:', newTruck);
-            // Update the state to add the new truck at the beginning of the list
-            this.setState((prevState) => ({
-                trucks: [newTruck, ...prevState.trucks],
-            }));
+            const trucks = await createTruck({"arrival":truck.arrival,"bay":truck.bay,"registration":truck.registration});
+            console.log('All trucks:', trucks);
+            this.setState({trucks: trucks});
             // Set success response
             this.setResponse('success', 'Truck added successfully');
         } catch (error) {
@@ -68,31 +65,19 @@ class TruckManager extends Component {
         }
     };
 
-    handleUpdateTruck = async (truck) => {
-        console.log('Updating truck:', truck);
+    handleUpdateTruck = async (updatedTruck) => {
+        console.log('Updating truck:', updatedTruck);
         try {
-            const updatedtruck = await updateTruck(truck);
-            console.log('Updated truck:', updatedtruck);
-            // Update the state to replace the truck with the updated truck
-            const trucks = this.state.trucks.map((t) => {
-                if (t.id === updatedtruck.id) {
-                    return updatedtruck;
-                } else {
-                    return t;
-                }
-            });
-            // Filter the trucks array to remove trucks with undefined departure
-            console.log('Trucks:', trucks);
-            const filteredTrucks = trucks.filter((truck) => truck.departure===null);
-            console.log('filteredTrucks:', filteredTrucks);
-            this.setState({ trucks:filteredTrucks });
+            const trucks = await updateTruck(updatedTruck);
+            console.log('All trucks:', trucks);
+            this.setState({ trucks: trucks });
             // Set success response
             this.setResponse('success', 'Truck updated successfully');
             // Check if the updated truck is in the list of trucks
-            if (filteredTrucks.every((t) => t.id !== truck.id)) {
+            if (trucks.every((t) => t.id !== updatedTruck.id)) {
                 // Show the modal (going to departed truck)
                 this.setState({
-                    selectedTruck: truck,
+                    selectedTruck: updatedTruck,
                     showMoveModal: true
                 });
             }
@@ -106,9 +91,8 @@ class TruckManager extends Component {
         // TODO: Implement logic to delete the truck with the specified ID from the backend server
         console.log('Deleting truck:', truckId);
         // Update the state to remove the truck from the list
-        const deletedTruck = await deleteTruck(truckId);
-        const trucks = this.state.trucks.filter((t) => t.id !== truckId);
-        this.setState({ trucks });
+        const trucks = await deleteTruck(truckId);
+        this.setState({ trucks: trucks });
     };
 
     handleCancelMove = () => {
@@ -151,7 +135,7 @@ class TruckManager extends Component {
                     </Col>
                     <Col sm={3} className="bg-light p-4">
                         <h2>Add Truck</h2>
-                        <TruckForm occupiedBays={this.state.occupiedBays} onAddTruck={this.handleAddTruck} response={this.state.response} />
+                        <TruckForm occupiedBays={this.state.occupiedBays} onCreatOrUpdateTruck={this.handleAddTruck} response={this.state.response} />
                     </Col>
                 </Row>
                 {showMoveModal && (

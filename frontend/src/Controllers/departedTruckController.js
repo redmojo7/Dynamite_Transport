@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const baseURL = 'http://localhost:8080/api/trucks/departed';
 
-export const getTruckHistories = async () => {
+export const getDepartedTrucks = async () => {
     try {
         const response = await axios.get(baseURL);
         return response.data;
@@ -11,7 +11,7 @@ export const getTruckHistories = async () => {
     }
 };
 
-export const deleteTruckHistory = async (truckId) => {
+export const deleteDepartedTrucks = async (truckId) => {
     try {
         const response = await axios.delete(`${baseURL}/${truckId}`);
         return response.data;
