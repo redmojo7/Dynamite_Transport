@@ -44,7 +44,7 @@ class TruckManager extends Component {
         this.setState((prevState) => ({
             response: {
                 ...prevState.response,
-                id: Date.now(),
+                id: new Date().getTime(),
                 status: status,
                 message: message,
             }

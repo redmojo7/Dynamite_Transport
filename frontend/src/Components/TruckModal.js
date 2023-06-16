@@ -5,10 +5,8 @@ import TruckForm from './TruckForm';
 class TruckModal extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
-            updatedTruck: { ...props.truck },
-            response: { status: '', message: '' }
+            response: { id: '', status: '', message: '' }
         };
     }
 
@@ -31,8 +29,8 @@ class TruckModal extends Component {
     };
 
     render() {
-        const { updatedTruck, response } = this.state;
-        const { onClose, occupiedBays } = this.props;
+        const { response } = this.state;
+        const { onClose, occupiedBays,truck } = this.props;
 
         return (
             <Modal show onHide={onClose}>
@@ -42,7 +40,7 @@ class TruckModal extends Component {
                 <Modal.Body>
                     <TruckForm
                         occupiedBays={occupiedBays}
-                        truck={updatedTruck}
+                        truck={truck}
                         onCreatOrUpdateTruck={this.handleCreatOrUpdateTruck}
                         response={response}
                         onClose={onClose}

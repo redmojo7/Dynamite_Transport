@@ -18,9 +18,8 @@ class DepartedTruckManager extends Component {
         // Fetch the initial list of trucks from the backend server
         getDepartedTrucks()
             .then((departedTrucks) => {
-                this.setState({trucks: departedTrucks});
-            })
-            .catch((error) => {
+                this.setState({ trucks: departedTrucks });
+            }).catch((error) => {
                 console.error('Error occurred during GET request:', error);
             });
     }
@@ -28,8 +27,12 @@ class DepartedTruckManager extends Component {
     handleDeleteTruck = async (truckId) => {
         // Delete the truck from the backend server
         console.log('Deleting truck:', truckId);
-        const departedTrucks = await deleteDepartedTrucks(truckId);
-        this.setState({ trucks: departedTrucks });
+        await deleteDepartedTrucks(truckId)
+            .then((departedTrucks) => {
+                this.setState({ trucks: departedTrucks });
+            }).catch((error) => {
+                console.error('Error occurred during DELETE request:', error);
+            });
     };
 
     render() {
@@ -43,7 +46,7 @@ class DepartedTruckManager extends Component {
                 </Row>
                 <Row>
                     <Col sm={8} className="mx-auto">
-                        <Trucks trucks={trucks} onDelete={this.handleDeleteTruck}/>
+                        <Trucks trucks={trucks} onDelete={this.handleDeleteTruck} />
                     </Col>
                     <Col sm={3} />
                 </Row>
