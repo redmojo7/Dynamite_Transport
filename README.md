@@ -2,6 +2,14 @@
 
 Dynamite_Transport is a web application to allow freight network managers to manage and track the departure and arrival of trucks at their warehouse in Welshpool. It consists of a frontend built with React and a backend server built with Node.js and Express.
 
+# Preview
+
+Here's a preview of what the app looks like:
+
+<div style="border: 1px solid #444; padding: 10px;">
+  <img src="./assets/Dynamite_Transport_screenshot.png" alt="Dynamite_Transport Screenshot" />
+</div>
+
 ## Features
 
 - Add new trucks with registration, arrival, departure, and bay information.
