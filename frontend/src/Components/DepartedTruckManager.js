@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Trucks from './Trucks';
-import { getDepartedTrucks, deleteDepartedTrucks } from '../controllers/departedTruckController';
+import { getDepartedTrucks, deleteDepartedTrucks } from '../Controllers/departedTruckController';
 
 
 class DepartedTruckManager extends Component {

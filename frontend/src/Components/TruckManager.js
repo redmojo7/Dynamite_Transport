@@ -1,4 +1,4 @@
-import { getTrucks, createTruck, updateTruck, deleteTruck } from '../controllers/truckController';
+import { getTrucks, createTruck, updateTruck, deleteTruck } from '../Controllers/truckController';
 import React, { Component } from 'react';
 import { Container, Row, Col, Button, Modal } from 'react-bootstrap';
 import Trucks from './Trucks';
