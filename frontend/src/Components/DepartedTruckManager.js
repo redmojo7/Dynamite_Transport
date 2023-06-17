@@ -6,10 +6,6 @@ import { getDepartedTrucks, deleteDepartedTrucks } from '../Controllers/departed
 
 class DepartedTruckManager extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     state = {
         trucks: [],
     };

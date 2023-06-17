@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Image, Row, Col, Container } from 'react-bootstrap';
+import { Button, Image, Row, Col } from 'react-bootstrap';
 import TruckModal from './TruckModal';
 
 const truckImage = "truck.png"
