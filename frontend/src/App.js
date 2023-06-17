@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import { BrowserRouter as Router } from "react-router-dom";
-import NavigationBar from "./components/NavigationBar";
-import Cover from "./components/Cover";
+import NavigationBar from "./Components/NavigationBar";
+import Cover from "./Components/Cover";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Footer from "./components/Footer";
-import TruckManager from "./components/TruckManager";
-import DepartedTruckManager from "./components/DepartedTruckManager";
-import Contact from "./components/Contact";
-import FirstLoginModal from "./components/FirstLoginModal";
+import Footer from "./Components/Footer";
+import TruckManager from "./Components/TruckManager";
+import DepartedTruckManager from "./Components/DepartedTruckManager";
+import Contact from "./Components/Contact";
+import FirstLoginModal from "./Components/FirstLoginModal";
 
 
 function App () {
